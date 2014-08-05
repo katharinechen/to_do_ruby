@@ -31,4 +31,9 @@ describe Task do
     task2 = Task.new({'name' => 'learn SQL', 'list_id' => 1})
     task1.should eq task2
   end
+
+  it 'displays tasks from a certain list' do
+    task1 = Task.new({'name' => ''})
+    task2 =
+  end
 end

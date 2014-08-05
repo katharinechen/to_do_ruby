@@ -1,4 +1,6 @@
 require 'pg'
+require 'pry'
+
 
 class Task
   attr_reader :name, :list_id
@@ -17,6 +19,17 @@ class Task
       tasks << Task.new({'name' => name, 'list_id' => list_id})
     end
     tasks
+  end
+
+  def self.list_tasks(id)
+    list_result = DB.exec("SELECT * FROM tasks WHERE list_id = #{id};")
+    list = []
+    list_result.each do |task|
+      name = task['name']
+      list_id = task['list_id'].to_i
+      list << Task.new({'name' => name, 'list_id' => list_id})
+    end
+    list
   end
 
   def save

@@ -37,4 +37,11 @@ describe List do
     list.save
     list.id.should be_an_instance_of Fixnum
   end
+
+  it 'lets you delete lists from the database' do
+    list = List.new({'name' => 'Epicodus'})
+    list.save
+    list.delete(list.name)
+    List.all.should eq []
+  end
 end
