@@ -12,7 +12,7 @@ end
 def list_menu
   puts "Please add a list"
   list_name = gets.chomp
-  puts "Press 't' to add a new task to the list or 'l' to add a new list"
+  puts "Press 't' to add a new task to the list, 'd' to display all list', or 'l' to add a new list."
   answer = gets.chomp.downcase
   new_list = List.new({'name'=>list_name})
   # binding.pry
@@ -22,6 +22,11 @@ def list_menu
     task_menu(new_list.id)
   elsif answer == "l"
     list_menu
+  elsif answer == "d"
+    master_list = List.all
+    master_list.each do |list|
+      puts list.name
+    end
   else
     puts "Please enter a valid option."
   end
@@ -34,8 +39,8 @@ def task_menu(id)
   new_task = Task.new({'name' => task_description, 'list_id' => id})
   new_task.save
 
-  puts "You have sucessfully saved your task!"
-
+  puts "You have sucessfully saved your task! Here is a list of all of your tasks."
+  list_menu
 end
 
 intro
